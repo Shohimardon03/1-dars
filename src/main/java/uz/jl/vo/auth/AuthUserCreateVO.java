@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import uz.jl.enums.Language;
 import uz.jl.vo.BaseVO;
 
 @Data
@@ -13,5 +14,6 @@ import uz.jl.vo.BaseVO;
 public class AuthUserCreateVO implements BaseVO {
     private String username;
     private String password;
+    private Language language;
     private String email;
 }

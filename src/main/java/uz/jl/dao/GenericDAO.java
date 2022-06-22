@@ -4,7 +4,9 @@ import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import uz.jl.configs.HibernateConfigurer;
+import uz.jl.domains.auth.AuthUser;
 
 import java.lang.reflect.ParameterizedType;
 import java.sql.SQLException;
@@ -58,7 +60,7 @@ public class GenericDAO<T, ID> implements BaseDAO {
                 .getResultList();
     }
 
-    protected Session getSession() {
+    protected    Session getSession() {
         if (Objects.isNull(sessionFactory) || sessionFactory.isClosed()) {
             sessionFactory = HibernateConfigurer.getSessionFactory();
         }
@@ -68,5 +70,7 @@ public class GenericDAO<T, ID> implements BaseDAO {
         }
         return session;
     }
+
+
 
 }

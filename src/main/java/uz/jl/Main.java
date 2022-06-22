@@ -12,6 +12,7 @@ import uz.jl.vo.http.Response;
 import java.util.Scanner;
 
 public class Main {
+
     AuthUserService service = ApplicationContextHolder.getBean(AuthUserService.class);
     public static void main(String[] args) {
 
@@ -46,6 +47,8 @@ public class Main {
     }
 
     private void login() {
+
+
         Response<AuthUserVO> response = service.login(
                 BaseUtils.readText("username ? "),
                 BaseUtils.readText("password ? ")

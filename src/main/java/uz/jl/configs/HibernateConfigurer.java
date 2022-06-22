@@ -25,6 +25,7 @@ public class HibernateConfigurer {
                 Properties properties = new Properties();
                 properties.load(new FileReader("src/main/resources/datasource.properties"));
                 registryBuilder.applySettings(properties);
+//                registryBuilder.configure();
                 registry = registryBuilder.build();
                 MetadataSources sources = new MetadataSources(registry);
 
