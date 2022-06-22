@@ -46,7 +46,7 @@ public class AuthUI {
             case "2" -> authUI.register();
             case "3" -> authUI.startQuiz();
             case "4" -> authUI.Settings();
-            case "5" -> authUI.testCrud();
+            case "5" -> TestUI.testCrud();
             case "6" -> authUI.showStatistics();
             case "7" -> authUI.subjectCrud();
             case "8" -> authUI.changeRole();
@@ -72,9 +72,6 @@ public class AuthUI {
 
     }
 
-    private void testCrud() {
-
-    }
 
     private void Settings() {
     }
