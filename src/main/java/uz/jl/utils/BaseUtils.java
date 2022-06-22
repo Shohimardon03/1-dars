@@ -6,6 +6,7 @@ import uz.jl.configs.PasswordConfigurer;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BaseUtils {
+
     private static BaseUtils instance;
 
     public String encode(String rawPassword) {

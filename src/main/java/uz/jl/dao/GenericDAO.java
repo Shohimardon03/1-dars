@@ -1,7 +1,9 @@
 package uz.jl.dao;
 
+import jakarta.transaction.Transactional;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import uz.jl.configs.HibernateConfigurer;
 
 import java.lang.reflect.ParameterizedType;
@@ -23,10 +25,13 @@ public class GenericDAO<T, ID> implements BaseDAO {
                 .getActualTypeArguments()[0];
     }
 
+    @Transactional
     public T save(T entity) {
         Session currentSession = getSession();
+        currentSession.beginTransaction();
         currentSession.persist(entity);
         currentSession.getTransaction().commit();
+        session.close();
         return entity;
     }
 

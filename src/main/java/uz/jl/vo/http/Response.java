@@ -2,11 +2,13 @@ package uz.jl.vo.http;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+@Getter
 public class Response<T> {
     private T body;
     private Integer total;
@@ -26,6 +28,7 @@ public class Response<T> {
         this.error = error;
         this.ok = ok;
     }
+
 
     public static ErrorVO errorBuilder() {
         return new ErrorVO();

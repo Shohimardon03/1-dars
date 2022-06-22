@@ -9,9 +9,9 @@ import uz.jl.enums.Status;
 import uz.jl.vo.GenericVO;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AuthUserUpdateVO extends GenericVO {
     private String username;
     private String email;

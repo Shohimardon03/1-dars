@@ -6,6 +6,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
+import uz.jl.Colors;
 import uz.jl.configs.ApplicationContextHolder;
 import uz.jl.configs.PasswordConfigurer;
 import uz.jl.dao.AbstractDAO;
@@ -16,6 +17,7 @@ import uz.jl.utils.BaseUtils;
 import uz.jl.vo.auth.AuthUserCreateVO;
 import uz.jl.vo.auth.AuthUserUpdateVO;
 import uz.jl.vo.auth.AuthUserVO;
+import uz.jl.vo.auth.Session;
 import uz.jl.vo.http.Response;
 
 import java.util.List;
@@ -81,4 +83,31 @@ public class AuthUserService extends AbstractDAO<AuthUserDAO> implements Generic
         }
         return instance;
     }
+
+    public Response<AuthUserVO> login(String username, String password) {
+        Optional<AuthUser> response = dao.findByUserName(username);
+
+        if (response.isEmpty()) {
+            throw new RuntimeException("Username does not exist!");
+        }
+
+        AuthUser authUser = response.get();
+        if (!utils.matchPassword(password, authUser.getPassword())) {
+            throw new RuntimeException("Bad credentials");
+        }
+        AuthUserVO authUserVO = AuthUserVO.builder()
+                .username(authUser.getUsername())
+                .email(authUser.getEmail())
+                .createdAt(authUser.getCreatedAt())
+                .build();
+        Session.setSessionUser(authUserVO);
+        return new Response<>(authUserVO);
+    }
+
+
+    public void register() {
+
+    }
+
+
 }

@@ -1,8 +1,10 @@
 package uz.jl.dao.auth;
 
+import jakarta.transaction.Transactional;
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import uz.jl.dao.GenericDAO;
 import uz.jl.domains.auth.AuthUser;
@@ -22,13 +24,17 @@ public class AuthUserDAO extends GenericDAO<AuthUser, Long> {
         return instance;
     }
 
+
+
     public Optional<AuthUser> findByUserName(String username) {
         Session session = getSession();
+        session.beginTransaction();
         Query<AuthUser> query = session
                 .createQuery("select t from AuthUser t where lower(t.username) = lower(:username) ",
                         AuthUser.class);
         query.setParameter("username", username);
-        AuthUser authUser = query.getSingleResultOrNull();
-        return Optional.ofNullable(query.getSingleResultOrNull());
+        Optional<AuthUser> result = Optional.ofNullable(query.getSingleResultOrNull());
+        session.close();
+        return result;
     }
 }

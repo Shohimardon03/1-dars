@@ -7,15 +7,17 @@ import lombok.NoArgsConstructor;
 import uz.jl.enums.AuthRole;
 import uz.jl.vo.GenericVO;
 
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
+@Builder
 public class AuthUserVO extends GenericVO {
     private String username;
     private String email;
     private AuthRole role;
-    private LocalDateTime createdAt;
+    private Timestamp createdAt;
+
 }

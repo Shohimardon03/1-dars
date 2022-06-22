@@ -29,6 +29,8 @@ public enum Status {
 
         @Override
         public Status convertToEntityAttribute(String dbData) {
+            if (Objects.isNull(dbData))
+                return null;
             return switch (dbData) {
                 case "Active User" -> ACTIVE;
                 case "User that have not reset password" -> PASSWORD_NOT_RESET;
