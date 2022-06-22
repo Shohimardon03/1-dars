@@ -8,6 +8,7 @@ import lombok.Getter;
 public enum AuthRole {
 
     ADMIN(100),
+    TEACHER(50),
     USER(10);
 
     private final int priority;

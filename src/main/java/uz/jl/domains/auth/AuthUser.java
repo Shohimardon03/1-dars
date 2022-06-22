@@ -7,6 +7,7 @@ import uz.jl.enums.AuthRole;
 import uz.jl.enums.Status;
 
 import java.sql.Timestamp;
+import java.util.Objects;
 
 @Entity
 @Getter
@@ -30,13 +31,23 @@ public class AuthUser extends Auditable {
     @Convert(converter = Status.StatusConvertor.class)
     private Status status;
 
+
+//    private Long subject_id
+
     @Builder(builderMethodName = "childBuilder")
     public AuthUser(Long id, Timestamp createdAt, Long createdBy, Timestamp updatedAt, Long updatedBy, boolean deleted, String username, String password, String email, AuthRole role, Status status) {
         super(id, createdAt, createdBy, updatedAt, updatedBy, deleted);
         this.username = username;
         this.password = password;
         this.email = email;
+
+        if(Objects.isNull(role))
+            role = AuthRole.USER;
         this.role = role;
+
+        if(Objects.isNull(status))
+            status = Status.ACTIVE;
         this.status = status;
+
     }
 }
